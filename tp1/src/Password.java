@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class Password {
     /**
-     * Hashes the provided password using the SHA-256 algorithm.
+     * Hashes the provided password using the SHA-256 algorithm..
      * 
      * @param password the password to be hashed
      * @return a hexadecimal string representing the hashed password
