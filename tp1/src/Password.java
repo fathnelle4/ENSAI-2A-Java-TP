@@ -1,5 +1,6 @@
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -7,7 +8,7 @@ import java.util.Map;
 
 public class Password {
     /**
-     * Hashes the provided password using the SHA-256 algorithm..
+     * Hashes the provided password using the SHA-256 algorithm.
      * 
      * @param password the password to be hashed
      * @return a hexadecimal string representing the hashed password
@@ -38,11 +39,18 @@ public class Password {
      * @param targetHash the target hash to match
      * @return the 6-digit number that matches, or null if no match is found
      */
-    public static String bruteForce6Digit(String targetHash) {
+    public static String bruteForce6Digit(String targetHash) { // String: suite de charactères avec des "", char : une
+                                                               // seul caractère 'a', int, Boolean
 
-        // Code here
-
+        for (int i = 0; i < 1000000; i++) {
+            String indiceString = String.format("%06d", i);
+            String indiceStringHashe = hashPassword(indiceString);
+            if (indiceStringHashe.equals(targetHash)) {
+                return indiceString;
+            }
+        }
         return null;
+
     }
 
     /**
@@ -61,9 +69,32 @@ public class Password {
      */
     public static boolean isStrongPassword(String password) {
 
-        // Code here
+        if (password.length() < 12) {
+            return false;
+        }
 
-        return false;
+        boolean contientUneMajuscule = false;
+        boolean contientUnChiffre = false;
+        boolean contientUneMinuscule = false;
+        boolean contientunespace = false;
+
+        for (int j = 0; j < password.length(); j++) {
+            char caractere = password.charAt(j);
+            if (Character.isUpperCase(caractere)) {
+                contientUneMajuscule = true;
+            } else if (Character.isDigit(caractere)) {
+                contientUnChiffre = true;
+            } else if (Character.isLowerCase(caractere)) {
+                contientUneMinuscule = true;
+            } else if (Character.isWhitespace(caractere)) {
+                contientunespace = true;
+            }
+
+        }
+        return contientUnChiffre && contientUneMajuscule
+                && contientUneMinuscule
+                && !contientunespace;
+
     }
 
     /**
@@ -77,8 +108,11 @@ public class Password {
     public static HashMap<String, Boolean> checkPasswordsList(ArrayList<String> passwords) {
 
         // Code here
-
-        return null;
+        HashMap<String, Boolean> resultat = new HashMap<>(); // Table maTable = new Table();
+        for (String motDePasse : passwords) {
+            resultat.put(motDePasse, isStrongPassword(motDePasse));
+        }
+        return resultat;
     }
 
     /**
@@ -96,6 +130,17 @@ public class Password {
     public static String generatePassword(int nbCar) {
 
         // Code here
+        String resultat = "";
+        
+        for (int i = 0; i <nbCar; i++){
+            System.out.println(i);
+            c = '$';
+            resultat.add(c)
+        }
+        String listeMajuscule = "";
+        for()
+        SecureRandom random = new SecureRandom();
+        
 
         return null;
     }
